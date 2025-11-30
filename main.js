@@ -75,6 +75,7 @@ const progressCountEl = document.getElementById('progress-count');
 const scoreEl = document.getElementById('score');
 const submitBtn = document.getElementById('submit-btn');
 const nextBtn = document.getElementById('next-btn');
+const resetBtn = document.getElementById('reset-btn');
 const reviewToggle = document.getElementById('review-toggle');
 const reviewList = document.getElementById('review-list');
 
@@ -107,6 +108,10 @@ function saveProgress() {
 function setButtonStates({ submitted }) {
   submitBtn.disabled = submitted;
   nextBtn.disabled = state.currentIndex >= state.questions.length - 1 || !submitted;
+}
+
+function clearStoredProgress() {
+  Object.values(storageKeys).forEach((key) => localStorage.removeItem(key));
 }
 
 function renderQuestion() {
@@ -228,6 +233,17 @@ function handleNext() {
   }
 }
 
+function handleReset() {
+  if (!state.questions.length) return;
+  state.currentIndex = 0;
+  state.score = 0;
+  state.answered = {};
+
+  clearStoredProgress();
+  renderQuestion();
+  renderReviewCards();
+}
+
 function renderReviewCards() {
   reviewList.innerHTML = '';
   state.questions.forEach((question, index) => {
@@ -300,6 +316,7 @@ function init() {
 const quizForm = document.getElementById('quiz-form');
 quizForm.addEventListener('submit', handleSubmit);
 nextBtn.addEventListener('click', handleNext);
+resetBtn.addEventListener('click', handleReset);
 reviewToggle.addEventListener('click', toggleReviewMode);
 
 document.addEventListener('DOMContentLoaded', init);
