@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessible Quiz</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <div class="branding">
+      <h1>Criminology Quiz</h1>
+      <p class="tagline">Test your knowledge with instant feedback.</p>
+    </div>
+    <div class="progress" aria-live="polite">
+      <span id="progress-count">Question 1 of 1</span>
+      <span id="score">Score: 0</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="quiz" aria-label="Quiz section">
+      <form id="quiz-form" class="quiz-form" aria-label="Quiz form">
+        <div id="question-container"></div>
+        <div class="controls">
+          <button type="submit" id="submit-btn">Submit Answer</button>
+          <button type="button" id="next-btn" disabled>Next Question</button>
+        </div>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+
+    <section class="review" aria-label="Review mode">
+      <header class="section-header">
+        <h2>Review Answers</h2>
+        <p>Review your choices and explanations.</p>
+        <button type="button" id="review-toggle">Toggle Review Mode</button>
+      </header>
+      <div id="review-list" class="review-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>Progress automatically saves to this browser.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
